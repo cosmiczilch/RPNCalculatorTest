@@ -20,6 +20,7 @@
 @implementation ViewController
 
 @synthesize display = _display;
+@synthesize stackDisplay = _stackDisplay;
 @synthesize currentlyEnteringInput = _currentlyEnteringInput;
 @synthesize rpnCalculator = _rpnCalculator;
 
@@ -48,6 +49,8 @@
     
     double result = [self.rpnCalculator ProcessOperator:operator];
     self.display.text = [NSString stringWithFormat:@"%g", result];
+    
+    [self updateStackDisplay];
 }
 
 - (IBAction)DigitPressed:(UIButton *)sender {
@@ -74,12 +77,18 @@
         self.currentlyEnteringInput = false;
         [self.rpnCalculator PushOperand:[self.display.text doubleValue]];
     }
+    [self updateStackDisplay];
 }
 
 - (IBAction)ClearButtonPressed {
     self.currentlyEnteringInput = false;
     self.display.text = @"0.0";
     [self.rpnCalculator Reset];
+    [self updateStackDisplay];
+}
+
+- (void) updateStackDisplay {
+    self.stackDisplay.text = [self.rpnCalculator GetOperandsStack];
 }
 
 @end
