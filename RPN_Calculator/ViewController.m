@@ -37,10 +37,13 @@
     }
     
     OPERATOR_t operator = OPERATOR_INVALID;
-    if      ([@"+" isEqualToString:sender.currentTitle])  { operator = OPERATOR_PLUS; }
-    else if ([@"-" isEqualToString:sender.currentTitle])  { operator = OPERATOR_MINUS; }
-    else if ([@"x" isEqualToString:sender.currentTitle])  { operator = OPERATOR_MULTIPLY; }
-    else if ([@"/" isEqualToString:sender.currentTitle])  { operator = OPERATOR_DIVIDE; }
+    if      ([@"+"      isEqualToString:sender.currentTitle])  { operator = OPERATOR_PLUS; }
+    else if ([@"-"      isEqualToString:sender.currentTitle])  { operator = OPERATOR_MINUS; }
+    else if ([@"x"      isEqualToString:sender.currentTitle])  { operator = OPERATOR_MULTIPLY; }
+    else if ([@"/"      isEqualToString:sender.currentTitle])  { operator = OPERATOR_DIVIDE; }
+    else if ([@"sin"    isEqualToString:sender.currentTitle])  { operator = OPERATOR_SIN; }
+    else if ([@"cos"    isEqualToString:sender.currentTitle])  { operator = OPERATOR_COS; }
+    else if ([@"sqrt"   isEqualToString:sender.currentTitle])  { operator = OPERATOR_SQRT; }
     
     double result = [self.rpnCalculator ProcessOperator:operator];
     self.display.text = [NSString stringWithFormat:@"%g", result];
@@ -51,7 +54,9 @@
     if (!self.currentlyEnteringInput) {
         self.currentlyEnteringInput = true;
         self.display.text = sender.currentTitle;
+        
     } else {
+        
         if ([@"." isEqualToString:sender.currentTitle]) {
             if ([self.display.text containsString:@"."]) {
                 // Ignore multiple decimal points in floating point numbers

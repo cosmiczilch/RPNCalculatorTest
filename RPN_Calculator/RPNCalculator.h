@@ -8,11 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+#define PI 3.141593
+
 typedef enum {
     OPERATOR_PLUS,
     OPERATOR_MINUS,
     OPERATOR_MULTIPLY,
     OPERATOR_DIVIDE,
+    OPERATOR_SIN,
+    OPERATOR_COS,
+    OPERATOR_SQRT,
     OPERATOR_INVALID,
     
 }OPERATOR_t;

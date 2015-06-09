@@ -57,6 +57,9 @@
             if (operand2 != 0.0f) {
                 result = operand1 / operand2;
             }
+        case OPERATOR_SIN:      result = sin([self popOperand] * PI / 180.0f); break;
+        case OPERATOR_COS:      result = cos([self popOperand] * PI / 180.0f); break;
+        case OPERATOR_SQRT:     result = sqrt([self popOperand]); break;
         default: break;
     }
     
