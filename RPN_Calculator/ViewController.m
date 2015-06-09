@@ -11,8 +11,13 @@
 
 @interface ViewController ()
 
+// Whether the user has begun entering input
 @property (nonatomic) BOOL currentlyEnteringInput;
+
+// An instance of the calculator model
 @property (nonatomic) RPNCalculator *rpnCalculator;
+
+// A string that holds every operand and operator that has been sent to the calculator, seperated by white spaces
 @property (nonatomic) NSString *currentInputStringComplete;
 
 - (void) updateStackDisplayWithString:(NSString *)stringToAppend;
@@ -22,11 +27,20 @@
 
 @implementation ViewController
 
+// Properties, getters/setters
 @synthesize display = _display;
 @synthesize stackDisplay = _stackDisplay;
+
 @synthesize currentlyEnteringInput = _currentlyEnteringInput;
 @synthesize rpnCalculator = _rpnCalculator;
 @synthesize currentInputStringComplete = _currentInputStringComplete;
+
+- (RPNCalculator *) rpnCalculator {
+    if (!_rpnCalculator) {
+        _rpnCalculator = [[RPNCalculator alloc] init];
+    }
+    return _rpnCalculator;
+}
 
 - (NSString *) currentInputStringComplete {
     if (!_currentInputStringComplete) {
@@ -35,12 +49,7 @@
     return _currentInputStringComplete;
 }
 
-- (RPNCalculator *) rpnCalculator {
-    if (!_rpnCalculator) {
-        _rpnCalculator = [[RPNCalculator alloc] init];
-    }
-    return _rpnCalculator;
-}
+// UI Event Handlers
 
 - (IBAction)OperatorPressed:(UIButton *)sender {
     
@@ -58,6 +67,7 @@
     else if ([@"sqrt"   isEqualToString:sender.currentTitle])  { operator = OPERATOR_SQRT; }
     else if ([@"pi"     isEqualToString:sender.currentTitle])  { operator = OPERATOR_PI; }
     
+    // Pass on the appropriate operator to the rpn calculator
     double result = [self.rpnCalculator ProcessOperator:operator];
     [self updateStackDisplayWithString:sender.currentTitle];
     
@@ -86,17 +96,22 @@
 
     if (self.currentlyEnteringInput) {
         self.currentlyEnteringInput = false;
+        
+        // Pass on the appropriate operand to the rpn calculator
         [self.rpnCalculator PushOperand:[self.display.text doubleValue]];
         [self updateStackDisplayWithString:self.display.text];
     }
 }
 
 - (IBAction)ClearButtonPressed {
-    self.currentlyEnteringInput = false;
-    self.display.text = @"0.0";
     [self.rpnCalculator Reset];
     [self clearStackDisplay];
+    
+    self.currentlyEnteringInput = false;
+    self.display.text = @"0.0";
 }
+
+// Private Helpers
 
 - (void) updateStackDisplayWithString:(NSString *)stringToAppend {
     

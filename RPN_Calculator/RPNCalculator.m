@@ -19,6 +19,7 @@
 
 @implementation RPNCalculator
 
+// The current operands, maintained as a stack
 @synthesize operandsStack = _operandsStack;
 
 - (NSMutableArray *) operandsStack {

@@ -10,6 +10,7 @@
 
 #define PI 3.141593
 
+// Supported Operations
 typedef enum {
     OPERATOR_PLUS,
     OPERATOR_MINUS,
@@ -21,15 +22,13 @@ typedef enum {
     OPERATOR_PI,
     OPERATOR_INVALID,
     
-}OPERATOR_t;
+} OPERATOR_t;
 
 @interface RPNCalculator : NSObject
 
-- (void) PushOperand:(double)operand;
-
-- (double) ProcessOperator:(OPERATOR_t)operator;
-
-- (void) Reset;
+- (void)    PushOperand:(double)operand;
+- (double)  ProcessOperator:(OPERATOR_t)operator;
+- (void)    Reset;
 
 @end
 

@@ -10,6 +10,7 @@
 
 @interface ViewController : UIViewController
 
+// UI References
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *stackDisplay;
 
