@@ -52,6 +52,12 @@
         self.currentlyEnteringInput = true;
         self.display.text = sender.currentTitle;
     } else {
+        if ([@"." isEqualToString:sender.currentTitle]) {
+            if ([self.display.text containsString:@"."]) {
+                // Ignore multiple decimal points in floating point numbers
+                return;
+            }
+        }
         self.display.text = [self.display.text stringByAppendingString:sender.currentTitle];
     }
 }
