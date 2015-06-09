@@ -7,21 +7,67 @@
 //
 
 #import "ViewController.h"
+#import "RPNCalculator.h"
 
 @interface ViewController ()
 
+@property (nonatomic) BOOL currentlyEnteringInput;
+@property (nonatomic) RPNCalculator *rpnCalculator;
+
 @end
+
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+@synthesize display = _display;
+@synthesize currentlyEnteringInput = _currentlyEnteringInput;
+@synthesize rpnCalculator = _rpnCalculator;
+
+- (RPNCalculator *) rpnCalculator {
+    if (!_rpnCalculator) {
+        _rpnCalculator = [[RPNCalculator alloc] init];
+    }
+    return _rpnCalculator;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)OperatorPressed:(UIButton *)sender {
+    
+    if (self.currentlyEnteringInput) {
+        [self EnterPressed];
+    }
+    
+    OPERATOR_t operator = OPERATOR_INVALID;
+    if      ([@"+" isEqualToString:sender.currentTitle])  { operator = OPERATOR_PLUS; }
+    else if ([@"-" isEqualToString:sender.currentTitle])  { operator = OPERATOR_MINUS; }
+    else if ([@"x" isEqualToString:sender.currentTitle])  { operator = OPERATOR_MULTIPLY; }
+    else if ([@"/" isEqualToString:sender.currentTitle])  { operator = OPERATOR_DIVIDE; }
+    
+    double result = [self.rpnCalculator ProcessOperator:operator];
+    self.display.text = [NSString stringWithFormat:@"%g", result];
+}
+
+- (IBAction)DigitPressed:(UIButton *)sender {
+    
+    if (!self.currentlyEnteringInput) {
+        self.currentlyEnteringInput = true;
+        self.display.text = sender.currentTitle;
+    } else {
+        self.display.text = [self.display.text stringByAppendingString:sender.currentTitle];
+    }
+}
+
+- (IBAction)EnterPressed {
+
+    if (self.currentlyEnteringInput) {
+        self.currentlyEnteringInput = false;
+        [self.rpnCalculator PushOperand:[self.display.text doubleValue]];
+    }
+}
+
+- (IBAction)ClearButtonPressed {
+    self.currentlyEnteringInput = false;
+    self.display.text = @"0.0";
+    [self.rpnCalculator Reset];
 }
 
 @end

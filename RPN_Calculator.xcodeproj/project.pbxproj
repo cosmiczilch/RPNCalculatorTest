@@ -14,6 +14,7 @@
 		E11855121B2643360001A5E8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E11855111B2643360001A5E8 /* Images.xcassets */; };
 		E11855151B2643360001A5E8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E11855131B2643360001A5E8 /* LaunchScreen.xib */; };
 		E11855211B2643370001A5E8 /* RPN_CalculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E11855201B2643370001A5E8 /* RPN_CalculatorTests.m */; };
+		E118552B1B266BB70001A5E8 /* RPNCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E118552A1B266BB70001A5E8 /* RPNCalculator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		E118551A1B2643370001A5E8 /* RPN_CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RPN_CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E118551F1B2643370001A5E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E11855201B2643370001A5E8 /* RPN_CalculatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RPN_CalculatorTests.m; sourceTree = "<group>"; };
+		E118552A1B266BB70001A5E8 /* RPNCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPNCalculator.m; sourceTree = "<group>"; };
+		E118552C1B266BD10001A5E8 /* RPNCalculator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPNCalculator.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,8 @@
 				E11855111B2643360001A5E8 /* Images.xcassets */,
 				E11855131B2643360001A5E8 /* LaunchScreen.xib */,
 				E11855041B2643360001A5E8 /* Supporting Files */,
+				E118552A1B266BB70001A5E8 /* RPNCalculator.m */,
+				E118552C1B266BD10001A5E8 /* RPNCalculator.h */,
 			);
 			path = RPN_Calculator;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E118552B1B266BB70001A5E8 /* RPNCalculator.m in Sources */,
 				E118550D1B2643360001A5E8 /* ViewController.m in Sources */,
 				E118550A1B2643360001A5E8 /* AppDelegate.m in Sources */,
 				E11855071B2643360001A5E8 /* main.m in Sources */,
