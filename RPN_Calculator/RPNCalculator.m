@@ -37,12 +37,27 @@
     return [topOfStack doubleValue];
 }
 
+- (void) debugPrintStack {
+    NSString* stackAsString = @"";
+    for (int i = 0; i < self.operandsStack.count; ++i) {
+        NSNumber *number = [self.operandsStack objectAtIndex:i];
+        if (number) {
+            stackAsString = [stackAsString stringByAppendingString:[NSString stringWithFormat:@"%g ", [number doubleValue]]];
+        }
+    }
+    NSLog(@"Current operands stack: %@", stackAsString);
+}
+
 // Public Methods:
 - (void) PushOperand:(double)operand {
+    
     [self.operandsStack addObject:[NSNumber numberWithDouble:operand]];
+    
+    [self debugPrintStack];
 }
 
 - (double) ProcessOperator:(OPERATOR_t)operator {
+    
     double result = 0.0f;
     double operand1 = 0.0;
     double operand2 = 0.0;
@@ -60,14 +75,19 @@
         case OPERATOR_SIN:      result = sin([self popOperand] * PI / 180.0f); break;
         case OPERATOR_COS:      result = cos([self popOperand] * PI / 180.0f); break;
         case OPERATOR_SQRT:     result = sqrt([self popOperand]); break;
+        case OPERATOR_PI:       result = PI;
         default: break;
     }
     
     [self.operandsStack addObject:[NSNumber numberWithDouble:result]];
+    
+    [self debugPrintStack];
+    
     return result;
 }
 
 - (void) Reset {
+    [self.operandsStack removeAllObjects];
 }
 
 @end

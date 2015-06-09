@@ -44,6 +44,7 @@
     else if ([@"sin"    isEqualToString:sender.currentTitle])  { operator = OPERATOR_SIN; }
     else if ([@"cos"    isEqualToString:sender.currentTitle])  { operator = OPERATOR_COS; }
     else if ([@"sqrt"   isEqualToString:sender.currentTitle])  { operator = OPERATOR_SQRT; }
+    else if ([@"pi"     isEqualToString:sender.currentTitle])  { operator = OPERATOR_PI; }
     
     double result = [self.rpnCalculator ProcessOperator:operator];
     self.display.text = [NSString stringWithFormat:@"%g", result];

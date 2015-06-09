@@ -18,6 +18,7 @@ typedef enum {
     OPERATOR_SIN,
     OPERATOR_COS,
     OPERATOR_SQRT,
+    OPERATOR_PI,
     OPERATOR_INVALID,
     
 }OPERATOR_t;
