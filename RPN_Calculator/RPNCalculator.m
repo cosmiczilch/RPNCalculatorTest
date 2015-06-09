@@ -38,10 +38,14 @@
 }
 
 - (void) debugPrintStack {
-    NSString *stackAsString = [self GetOperandsStack];
-    if (stackAsString) {
-            NSLog(@"Current Operands: %@", stackAsString);
+    NSString* stackAsString = @"";
+    for (int i = 0; i < self.operandsStack.count; ++i) {
+        NSNumber *number = [self.operandsStack objectAtIndex:i];
+        if (number) {
+            stackAsString = [stackAsString stringByAppendingString:[NSString stringWithFormat:@"%g ", [number doubleValue]]];
+        }
     }
+    NSLog(@"Current Operands: %@", stackAsString);
 }
 
 // Public Methods:
@@ -84,17 +88,6 @@
 
 - (void) Reset {
     [self.operandsStack removeAllObjects];
-}
-
-- (NSString *) GetOperandsStack {
-    NSString* stackAsString = @"";
-    for (int i = 0; i < self.operandsStack.count; ++i) {
-        NSNumber *number = [self.operandsStack objectAtIndex:i];
-        if (number) {
-            stackAsString = [stackAsString stringByAppendingString:[NSString stringWithFormat:@"%g ", [number doubleValue]]];
-        }
-    }
-    return stackAsString;
 }
 
 @end

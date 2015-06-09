@@ -13,6 +13,9 @@
 
 @property (nonatomic) BOOL currentlyEnteringInput;
 @property (nonatomic) RPNCalculator *rpnCalculator;
+@property (nonatomic) NSString *currentInputStringComplete;
+
+- (void) updateStackDisplayWithString:(NSString *)stringToAppend;
 
 @end
 
@@ -23,6 +26,14 @@
 @synthesize stackDisplay = _stackDisplay;
 @synthesize currentlyEnteringInput = _currentlyEnteringInput;
 @synthesize rpnCalculator = _rpnCalculator;
+@synthesize currentInputStringComplete = _currentInputStringComplete;
+
+- (NSString *) currentInputStringComplete {
+    if (!_currentInputStringComplete) {
+        _currentInputStringComplete = @"";
+    }
+    return _currentInputStringComplete;
+}
 
 - (RPNCalculator *) rpnCalculator {
     if (!_rpnCalculator) {
@@ -48,9 +59,9 @@
     else if ([@"pi"     isEqualToString:sender.currentTitle])  { operator = OPERATOR_PI; }
     
     double result = [self.rpnCalculator ProcessOperator:operator];
-    self.display.text = [NSString stringWithFormat:@"%g", result];
+    [self updateStackDisplayWithString:sender.currentTitle];
     
-    [self updateStackDisplay];
+    self.display.text = [NSString stringWithFormat:@"%g", result];
 }
 
 - (IBAction)DigitPressed:(UIButton *)sender {
@@ -76,19 +87,27 @@
     if (self.currentlyEnteringInput) {
         self.currentlyEnteringInput = false;
         [self.rpnCalculator PushOperand:[self.display.text doubleValue]];
+        [self updateStackDisplayWithString:self.display.text];
     }
-    [self updateStackDisplay];
 }
 
 - (IBAction)ClearButtonPressed {
     self.currentlyEnteringInput = false;
     self.display.text = @"0.0";
     [self.rpnCalculator Reset];
-    [self updateStackDisplay];
+    [self clearStackDisplay];
 }
 
-- (void) updateStackDisplay {
-    self.stackDisplay.text = [self.rpnCalculator GetOperandsStack];
+- (void) updateStackDisplayWithString:(NSString *)stringToAppend {
+    
+    self.currentInputStringComplete = [self.currentInputStringComplete stringByAppendingString:@" "];
+    self.currentInputStringComplete = [self.currentInputStringComplete stringByAppendingString:stringToAppend];
+    self.stackDisplay.text = self.currentInputStringComplete;
+}
+
+- (void) clearStackDisplay {
+    self.currentInputStringComplete = @"";
+    self.stackDisplay.text = self.currentInputStringComplete;
 }
 
 @end

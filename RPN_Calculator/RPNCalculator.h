@@ -31,7 +31,5 @@ typedef enum {
 
 - (void) Reset;
 
-- (NSString *) GetOperandsStack;
-
 @end
 
