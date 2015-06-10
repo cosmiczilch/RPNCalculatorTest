@@ -30,6 +30,7 @@ typedef enum {
 - (void)    PushVariable:(NSString *)variableName;
 - (double)  ProcessOperator:(OPERATOR_t)operator withVariables:(NSDictionary *)variableValues;
 - (void)    Reset;
+- (void)    UndoLastOperation;
 
 @property (readonly) id currentProgram;
 

@@ -587,7 +587,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="XWw-7Q-5hk"/>
                                     <constraint firstAttribute="width" constant="53" id="YHh-il-jYi"/>
                                 </constraints>
-                                <state key="normal" title="pi">
+                                <state key="normal" title="π">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -700,7 +700,7 @@
                                     <action selector="CaptureZ:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bYk-ke-BPh"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="variables used" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swU-12-PXh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swU-12-PXh">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -709,6 +709,20 @@
                                     <rect key="frame" x="35" y="23" width="335" height="21"/>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="im6-4c-Ife">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.53054962429999997" green="0.64716675540000002" blue="0.67155934340000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="↶ UNDO">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="291" y="485" width="79" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="UndoPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xex-P8-cou"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -820,6 +834,7 @@
                                 <exclude reference="ESE-hU-aGW"/>
                                 <exclude reference="0jI-Mg-z1O"/>
                                 <exclude reference="swU-12-PXh"/>
+                                <exclude reference="im6-4c-Ife"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="Hcw-RY-9dQ"/>
@@ -931,6 +946,7 @@
                                 <include reference="ESE-hU-aGW"/>
                                 <include reference="0jI-Mg-z1O"/>
                                 <include reference="swU-12-PXh"/>
+                                <include reference="im6-4c-Ife"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="Hcw-RY-9dQ"/>

@@ -150,6 +150,23 @@
     [self captureCurrentResultAsVariable:@"z"];
 }
 
+- (IBAction)UndoPressed:(UIButton *)sender {
+    if (self.currentlyEnteringInput) {
+        NSString *newInput = self.display.text;
+        if ([newInput length] > 0) {
+            newInput = [newInput substringToIndex:[newInput length] - 1];
+        }
+        self.display.text = newInput;
+        if ([self.display.text length] == 0) {
+            self.currentlyEnteringInput = false;
+        }
+        
+    } else {
+        [self.rpnCalculator UndoLastOperation];
+        [self updateVariablesUsedDisplayAndStackDisplayWithString:@""];
+    }
+}
+
 // Private Helpers
 
 - (void) updateVariablesUsedDisplayAndStackDisplayWithString:(NSString *)stringToAppend {

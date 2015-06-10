@@ -59,6 +59,12 @@
     [self.programStack removeAllObjects];
 }
 
+- (void) UndoLastOperation {
+    if ([self.programStack count] > 0) {
+        [self.programStack removeLastObject];
+    }
+}
+
 // Static methods
 
 + (double) evaluateProgramStackRecursive:(NSMutableArray *)programStack withVariables:(NSDictionary *)variableValues {
@@ -176,7 +182,7 @@
                 break;
                 
             case OPERATOR_PI:
-                return @"pi";
+                return @"π";
                 break;
                 
                 
@@ -191,7 +197,9 @@
     NSString *description = @"";
     if ([program isKindOfClass:[NSArray class]]) {
         NSMutableArray *programMutable = [program mutableCopy];
-        description = [self getInfixExpressionFromPostfixExpression:programMutable];
+        while ([programMutable count] > 0) {
+            description = [NSString stringWithFormat:@"%@%@, ", description, [self getInfixExpressionFromPostfixExpression:programMutable]];
+        }
     }
     
     return  description;
