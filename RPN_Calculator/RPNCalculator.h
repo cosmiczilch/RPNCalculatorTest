@@ -27,12 +27,14 @@ typedef enum {
 @interface RPNCalculator : NSObject
 
 - (void)    PushOperand:(double)operand;
-- (double)  ProcessOperator:(OPERATOR_t)operator;
+- (void)    PushVariable:(NSString *)variableName;
+- (double)  ProcessOperator:(OPERATOR_t)operator withVariables:(NSDictionary *)variableValues;
 - (void)    Reset;
 
 @property (readonly) id currentProgram;
 
-+ (double) runProgram:(id)program;
++ (double) runProgram:(id)program withVariables:(NSDictionary *)variableValues;
+
 + (NSString *) getDescriptionOfProgram:(id)program;
 
 @end

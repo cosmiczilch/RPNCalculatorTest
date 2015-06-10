@@ -43,11 +43,16 @@
     [self.programStack addObject:[NSNumber numberWithDouble:operand]];
 }
 
-- (double) ProcessOperator:(OPERATOR_t)operator {
+- (void) PushVariable:(NSString *)variableName {
+    
+    [self.programStack addObject:[variableName copy]];
+}
+
+- (double) ProcessOperator:(OPERATOR_t)operator withVariables:(NSDictionary *)variableValues {
     
     [self.programStack addObject:[NSValue value:&operator withObjCType:@encode(OPERATOR_t)]];
    
-    return [RPNCalculator runProgram:[self currentProgram]];
+    return [RPNCalculator runProgram:[self currentProgram] withVariables:variableValues];
 }
 
 - (void) Reset {
@@ -56,7 +61,7 @@
 
 // Static methods
 
-+ (double) evaluateProgramStackRecursive:(NSMutableArray *)programStack {
++ (double) evaluateProgramStackRecursive:(NSMutableArray *)programStack withVariables:(NSDictionary *)variableValues {
     double result = 0.0;
     double operand1, operand2;
     
@@ -66,7 +71,13 @@
         [programStack removeLastObject];
     }
     
-    if ([topOfStack isKindOfClass:[NSNumber class]]) {
+    if ([topOfStack isKindOfClass:[NSString class]]) {
+        // If it is a variable, return the value of the variable from the dictionary
+        NSString *variableName = (NSString *)topOfStack;
+        result = [[variableValues valueForKey:variableName] doubleValue];
+        
+    }
+    else if ([topOfStack isKindOfClass:[NSNumber class]]) {
         // If its a constant, return the constant
         result = [topOfStack doubleValue];
         
@@ -77,18 +88,18 @@
         [topOfStack getValue:&operator];
     
         switch (operator) {
-            case OPERATOR_PLUS:     result = [self evaluateProgramStackRecursive:programStack] + [self evaluateProgramStackRecursive:programStack]; break;
-            case OPERATOR_MINUS:    result = ([self evaluateProgramStackRecursive:programStack] - [self evaluateProgramStackRecursive:programStack]) * -1.0; break;
-            case OPERATOR_MULTIPLY: result = [self evaluateProgramStackRecursive:programStack] * [self evaluateProgramStackRecursive:programStack]; break;
+            case OPERATOR_PLUS:     result = [self evaluateProgramStackRecursive:programStack withVariables:variableValues] + [self evaluateProgramStackRecursive:programStack withVariables:variableValues]; break;
+            case OPERATOR_MINUS:    result = ([self evaluateProgramStackRecursive:programStack withVariables:variableValues] - [self evaluateProgramStackRecursive:programStack withVariables:variableValues]) * -1.0; break;
+            case OPERATOR_MULTIPLY: result = [self evaluateProgramStackRecursive:programStack withVariables:variableValues] * [self evaluateProgramStackRecursive:programStack withVariables:variableValues]; break;
             case OPERATOR_DIVIDE:
-                operand2 = [self evaluateProgramStackRecursive:programStack];
-                operand1 = [self evaluateProgramStackRecursive:programStack];
+                operand2 = [self evaluateProgramStackRecursive:programStack withVariables:variableValues];
+                operand1 = [self evaluateProgramStackRecursive:programStack withVariables:variableValues];
                 if (operand2 != 0.0f) {
                     result = operand1 / operand2;
                 }
-            case OPERATOR_SIN:      result = sin([self evaluateProgramStackRecursive:programStack] * PI / 180.0f); break;
-            case OPERATOR_COS:      result = cos([self evaluateProgramStackRecursive:programStack] * PI / 180.0f); break;
-            case OPERATOR_SQRT:     result = sqrt([self evaluateProgramStackRecursive:programStack]); break;
+            case OPERATOR_SIN:      result = sin([self evaluateProgramStackRecursive:programStack withVariables:variableValues] * PI / 180.0f); break;
+            case OPERATOR_COS:      result = cos([self evaluateProgramStackRecursive:programStack withVariables:variableValues] * PI / 180.0f); break;
+            case OPERATOR_SQRT:     result = sqrt([self evaluateProgramStackRecursive:programStack withVariables:variableValues]); break;
             case OPERATOR_PI:       result = PI;
             default: break;
         }
@@ -97,19 +108,20 @@
     return result;
 }
 
-+ (double) runProgram:(id)program {
++ (double) runProgram:(id)program withVariables:(NSDictionary *)variableValues {
     double result = 0.0;
     
     NSMutableArray *programStack = nil;
     if ([program isKindOfClass:[NSArray class]]) {
         programStack = [program mutableCopy];
         if (programStack) {
-            result = [self evaluateProgramStackRecursive:programStack];
+            result = [self evaluateProgramStackRecursive:programStack withVariables:variableValues];
         }
     }
     
     return  result;
 }
+
 
 + (NSString *) getDescriptionOfProgram:(id)program {
     NSString *description = @"";

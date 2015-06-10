@@ -20,6 +20,7 @@
 // A string that holds every operand and operator that has been sent to the calculator, seperated by white spaces
 @property (nonatomic) NSString *currentInputStringComplete;
 
+// Dictionary of variable values keyed by variable names
 @property (nonatomic) NSMutableDictionary *variableKVPs;
 
 - (void) updateStackDisplayWithString:(NSString *)stringToAppend;
@@ -40,6 +41,9 @@
         }
         if (!self.currentInputStringComplete) {
             self.currentInputStringComplete = @"";
+        }
+        if (!self.variableKVPs) {
+            self.variableKVPs = [[NSMutableDictionary alloc] init];
         }
     }
     
@@ -65,7 +69,7 @@
     else if ([@"pi"     isEqualToString:sender.currentTitle])  { operator = OPERATOR_PI; }
     
     // Pass on the appropriate operator to the rpn calculator
-    double result = [self.rpnCalculator ProcessOperator:operator];
+    double result = [self.rpnCalculator ProcessOperator:operator withVariables:[self.variableKVPs copy]];
     [self updateStackDisplayWithString:sender.currentTitle];
     
     self.display.text = [NSString stringWithFormat:@"%g", result];
@@ -95,7 +99,18 @@
         self.currentlyEnteringInput = false;
         
         // Pass on the appropriate operand to the rpn calculator
-        [self.rpnCalculator PushOperand:[self.display.text doubleValue]];
+        if ([self.display.text isEqualToString:@"x"] ||
+            [self.display.text isEqualToString:@"y"] ||
+            [self.display.text isEqualToString:@"z"]) {
+            
+            // Its a variable
+            [self.rpnCalculator PushVariable:self.display.text];
+        } else {
+            
+            // Its a regular number
+            [self.rpnCalculator PushOperand:[self.display.text doubleValue]];
+            
+        }
         [self updateStackDisplayWithString:self.display.text];
     }
 }
@@ -109,15 +124,36 @@
 }
 
 - (IBAction)VariableButtonPressed:(UIButton *)sender {
+    
+    // Do not allow variables in the middle of numbers, for instance 23x
+    if (!self.currentlyEnteringInput) {
+        
+        unichar variableNameChar = [sender.currentTitle characterAtIndex:0];
+        if (variableNameChar == 'x' || variableNameChar == 'y' || variableNameChar == 'z') {
+            
+            NSString *variableName = [NSString stringWithCharacters:&variableNameChar length:1];
+            self.display.text = variableName;
+            
+            // Simulate enter pressed to send the variable to the calculator
+            self.currentlyEnteringInput = true;
+            [self EnterPressed];
+            
+        } else {
+            NSLog(@"Unrecognized variable name");
+        }
+    }
 }
 
 - (IBAction)CaptureX:(UIButton *)sender {
+    [self captureCurrentResultAsVariable:@"x"];
 }
 
 - (IBAction)CaptureY:(UIButton *)sender {
+    [self captureCurrentResultAsVariable:@"y"];
 }
 
 - (IBAction)CaptureZ:(UIButton *)sender {
+    [self captureCurrentResultAsVariable:@"z"];
 }
 
 // Private Helpers
@@ -132,6 +168,24 @@
 - (void) clearStackDisplay {
     self.currentInputStringComplete = @"";
     self.stackDisplay.text = self.currentInputStringComplete;
+}
+
+- (void) captureCurrentResultAsVariable:(NSString*)variableName {
+    double currentResult = [self.display.text doubleValue];
+    [self addVariableValue:currentResult ForKey:variableName];
+}
+
+- (void) addVariableValue:(double)value ForKey:(NSString *)key {
+    id valueId = [NSNumber numberWithDouble:value];
+    [self.variableKVPs setValue:valueId forKey:key];
+}
+
+- (double) getValueForVariableByKey:(NSString *)key {
+    id value = [self.variableKVPs valueForKey:key];
+    if (value) {
+        return [value doubleValue];
+    }
+    return 0.0;
 }
 
 @end
