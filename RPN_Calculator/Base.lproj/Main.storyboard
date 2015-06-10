@@ -700,6 +700,15 @@
                                     <action selector="CaptureZ:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bYk-ke-BPh"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="variables used" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swU-12-PXh">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="35" y="23" width="335" height="21"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -810,6 +819,7 @@
                                 <exclude reference="DCY-jY-gu1"/>
                                 <exclude reference="ESE-hU-aGW"/>
                                 <exclude reference="0jI-Mg-z1O"/>
+                                <exclude reference="swU-12-PXh"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="Hcw-RY-9dQ"/>
@@ -920,6 +930,7 @@
                                 <include reference="DCY-jY-gu1"/>
                                 <include reference="ESE-hU-aGW"/>
                                 <include reference="0jI-Mg-z1O"/>
+                                <include reference="swU-12-PXh"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="Hcw-RY-9dQ"/>
@@ -1004,6 +1015,7 @@
                     <connections>
                         <outlet property="display" destination="LQF-mL-tOp" id="unP-0z-dLE"/>
                         <outlet property="stackDisplay" destination="uBT-tV-UyG" id="ZQn-il-AX9"/>
+                        <outlet property="variablesUsedDisplay" destination="swU-12-PXh" id="uxE-7A-3Dr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

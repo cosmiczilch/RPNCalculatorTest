@@ -197,6 +197,21 @@
     return  description;
 }
 
++ (NSSet *) variablesUsedInProgram:(id)program {
+    NSMutableSet *result = [[NSMutableSet alloc] init];
+    
+    if ([program isKindOfClass:[NSArray class]]) {
+        for (id token in program) {
+            if ([token isKindOfClass:[NSString class]]) {
+                [result addObject:token];
+            }
+        }
+    }
+    
+    // Return immutable copy:
+    return [result copy];
+}
+
 @end
 
 #endif

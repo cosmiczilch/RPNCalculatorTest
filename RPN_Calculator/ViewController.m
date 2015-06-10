@@ -20,7 +20,7 @@
 // Dictionary of variable values keyed by variable names
 @property (nonatomic) NSMutableDictionary *variableKVPs;
 
-- (void) updateStackDisplayWithString:(NSString *)stringToAppend;
+- (void) updateVariablesUsedDisplayAndStackDisplayWithString:(NSString *)stringToAppend;
 
 @end
 
@@ -64,7 +64,7 @@
     
     // Pass on the appropriate operator to the rpn calculator
     double result = [self.rpnCalculator ProcessOperator:operator withVariables:[self.variableKVPs copy]];
-    [self updateStackDisplayWithString:sender.currentTitle];
+    [self updateVariablesUsedDisplayAndStackDisplayWithString:sender.currentTitle];
     
     self.display.text = [NSString stringWithFormat:@"%g", result];
 }
@@ -105,7 +105,7 @@
             [self.rpnCalculator PushOperand:[self.display.text doubleValue]];
             
         }
-        [self updateStackDisplayWithString:self.display.text];
+        [self updateVariablesUsedDisplayAndStackDisplayWithString:self.display.text];
     }
 }
 
@@ -152,13 +152,28 @@
 
 // Private Helpers
 
-- (void) updateStackDisplayWithString:(NSString *)stringToAppend {
+- (void) updateVariablesUsedDisplayAndStackDisplayWithString:(NSString *)stringToAppend {
     
+    // Show the infix notation of the currently entered expression
     self.stackDisplay.text = [RPNCalculator getDescriptionOfProgram:self.rpnCalculator.currentProgram];
+    
+    // Update variables used:
+    NSString *result = @"";
+    NSSet *variablesUsed = [RPNCalculator variablesUsedInProgram:self.rpnCalculator.currentProgram];
+    if (variablesUsed) {
+        for (id variable in variablesUsed) {
+            if ([variable isKindOfClass:[NSString class]]) {
+                NSString *variableName = (NSString *)variable;
+                result = [NSString stringWithFormat:@"%@%@ = %g, ", result, variableName, [self getValueForVariableByKey:variableName]];
+            }
+        }
+    }
+    self.variablesUsedDisplay.text = result;
 }
 
 - (void) clearStackDisplay {
     self.stackDisplay.text = @"";
+    self.variablesUsedDisplay.text = @"";
 }
 
 - (void) captureCurrentResultAsVariable:(NSString*)variableName {

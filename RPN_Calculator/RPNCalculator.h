@@ -36,6 +36,7 @@ typedef enum {
 + (double) runProgram:(id)program withVariables:(NSDictionary *)variableValues;
 
 + (NSString *) getDescriptionOfProgram:(id)program;
++ (NSSet *) variablesUsedInProgram:(id)program;
 
 @end
 

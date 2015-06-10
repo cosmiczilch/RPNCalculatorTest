@@ -15,6 +15,7 @@
 // UI References
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *stackDisplay;
+@property (weak, nonatomic) IBOutlet UILabel *variablesUsedDisplay;
 
 @end
 
