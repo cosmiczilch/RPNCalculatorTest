@@ -622,6 +622,84 @@
                                     <rect key="frame" x="35" y="52" width="335" height="31"/>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="299-fX-uQZ">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.86551020349999996" blue="0.25495564479999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="x = 0">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="35" y="485" width="114" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="VariableButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fOE-KN-6wN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leP-J2-xSF">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.86551020349999996" blue="0.25495564479999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="y = 0">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="35" y="523" width="114" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="VariableButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wrB-fa-Zgb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsR-Zw-7mj">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.86551020349999996" blue="0.25495564479999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="z = 0">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="35" y="562" width="114" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="VariableButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dan-6v-Zht"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCY-jY-gu1">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.20533205560000001" green="0.9011403093" blue="0.18501984190000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Capture x">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="157" y="485" width="126" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="CaptureX:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c2Q-kt-icW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESE-hU-aGW">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.20533205560000001" green="0.9011403093" blue="0.18501984190000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Capture y">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="157" y="523" width="126" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="CaptureY:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aUG-fU-Zqk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jI-Mg-z1O">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.20533205560000001" green="0.9011403093" blue="0.18501984190000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Capture z">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="157" y="562" width="126" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="CaptureZ:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bYk-ke-BPh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -726,6 +804,12 @@
                                 <exclude reference="yva-mG-i8C"/>
                                 <exclude reference="Ghf-UU-V8e"/>
                                 <exclude reference="uBT-tV-UyG"/>
+                                <exclude reference="299-fX-uQZ"/>
+                                <exclude reference="leP-J2-xSF"/>
+                                <exclude reference="fsR-Zw-7mj"/>
+                                <exclude reference="DCY-jY-gu1"/>
+                                <exclude reference="ESE-hU-aGW"/>
+                                <exclude reference="0jI-Mg-z1O"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="Hcw-RY-9dQ"/>
@@ -830,6 +914,12 @@
                                 <include reference="yva-mG-i8C"/>
                                 <include reference="Ghf-UU-V8e"/>
                                 <include reference="uBT-tV-UyG"/>
+                                <include reference="299-fX-uQZ"/>
+                                <include reference="leP-J2-xSF"/>
+                                <include reference="fsR-Zw-7mj"/>
+                                <include reference="DCY-jY-gu1"/>
+                                <include reference="ESE-hU-aGW"/>
+                                <include reference="0jI-Mg-z1O"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="Hcw-RY-9dQ"/>

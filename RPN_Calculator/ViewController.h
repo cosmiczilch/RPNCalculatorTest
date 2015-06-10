@@ -10,6 +10,8 @@
 
 @interface ViewController : UIViewController
 
+- (id)initWithCoder:(NSCoder *)coder;
+
 // UI References
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *stackDisplay;

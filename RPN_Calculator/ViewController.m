@@ -20,6 +20,8 @@
 // A string that holds every operand and operator that has been sent to the calculator, seperated by white spaces
 @property (nonatomic) NSString *currentInputStringComplete;
 
+@property (nonatomic) NSMutableDictionary *variableKVPs;
+
 - (void) updateStackDisplayWithString:(NSString *)stringToAppend;
 
 @end
@@ -27,26 +29,21 @@
 
 @implementation ViewController
 
-// Properties, getters/setters
-@synthesize display = _display;
-@synthesize stackDisplay = _stackDisplay;
-
-@synthesize currentlyEnteringInput = _currentlyEnteringInput;
-@synthesize rpnCalculator = _rpnCalculator;
-@synthesize currentInputStringComplete = _currentInputStringComplete;
-
-- (RPNCalculator *) rpnCalculator {
-    if (!_rpnCalculator) {
-        _rpnCalculator = [[RPNCalculator alloc] init];
+// Overridden Constructor:
+- (id)initWithCoder:(NSCoder *)coder {
+    
+    self = [super initWithCoder:coder];
+    if (self) {
+        // Custom initialization
+        if (!self.rpnCalculator) {
+            self.rpnCalculator = [[RPNCalculator alloc] init];
+        }
+        if (!self.currentInputStringComplete) {
+            self.currentInputStringComplete = @"";
+        }
     }
-    return _rpnCalculator;
-}
-
-- (NSString *) currentInputStringComplete {
-    if (!_currentInputStringComplete) {
-        _currentInputStringComplete = @"";
-    }
-    return _currentInputStringComplete;
+    
+    return self;
 }
 
 // UI Event Handlers
@@ -109,6 +106,18 @@
     
     self.currentlyEnteringInput = false;
     self.display.text = @"0.0";
+}
+
+- (IBAction)VariableButtonPressed:(UIButton *)sender {
+}
+
+- (IBAction)CaptureX:(UIButton *)sender {
+}
+
+- (IBAction)CaptureY:(UIButton *)sender {
+}
+
+- (IBAction)CaptureZ:(UIButton *)sender {
 }
 
 // Private Helpers
