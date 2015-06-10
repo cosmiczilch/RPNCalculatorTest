@@ -30,5 +30,10 @@ typedef enum {
 - (double)  ProcessOperator:(OPERATOR_t)operator;
 - (void)    Reset;
 
+@property (readonly) id currentProgram;
+
++ (double) runProgram:(id)program;
++ (NSString *) getDescriptionOfProgram:(id)program;
+
 @end
 

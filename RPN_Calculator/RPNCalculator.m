@@ -13,82 +13,108 @@
 
 @interface RPNCalculator()
 
-@property (nonatomic) NSMutableArray *operandsStack;
+@property (nonatomic) NSMutableArray *programStack;
 
 @end
 
 @implementation RPNCalculator
 
-// The current operands, maintained as a stack
-@synthesize operandsStack = _operandsStack;
+// The current expression being evaluated
+@synthesize programStack = _programStack;
 
-- (NSMutableArray *) operandsStack {
-    if (!_operandsStack) {
-        _operandsStack = [[NSMutableArray alloc] init];
+- (NSMutableArray *) programStack {
+    if (!_programStack) {
+        _programStack = [[NSMutableArray alloc] init];
     }
-    return _operandsStack;
+    return _programStack;
 }
 
 // Helpers:
-- (double) popOperand {
-    NSNumber *topOfStack = self.operandsStack.lastObject;
-    if (topOfStack) {
-        [self.operandsStack removeLastObject];
-    }
-    return [topOfStack doubleValue];
+
+// Public Methods an Properties:
+
+- (id) currentProgram {
+    id immutableCopy = [self.programStack copy];
+    return immutableCopy;
 }
 
-- (void) debugPrintStack {
-    NSString* stackAsString = @"";
-    for (int i = 0; i < self.operandsStack.count; ++i) {
-        NSNumber *number = [self.operandsStack objectAtIndex:i];
-        if (number) {
-            stackAsString = [stackAsString stringByAppendingString:[NSString stringWithFormat:@"%g ", [number doubleValue]]];
-        }
-    }
-    NSLog(@"Current Operands: %@", stackAsString);
-}
-
-// Public Methods:
 - (void) PushOperand:(double)operand {
     
-    [self.operandsStack addObject:[NSNumber numberWithDouble:operand]];
-    
-    [self debugPrintStack];
+    [self.programStack addObject:[NSNumber numberWithDouble:operand]];
 }
 
 - (double) ProcessOperator:(OPERATOR_t)operator {
     
-    double result = 0.0f;
-    double operand1 = 0.0;
-    double operand2 = 0.0;
+    [self.programStack addObject:[NSValue value:&operator withObjCType:@encode(OPERATOR_t)]];
+   
+    return [RPNCalculator runProgram:[self currentProgram]];
+}
+
+- (void) Reset {
+    [self.programStack removeAllObjects];
+}
+
+// Static methods
+
++ (double) evaluateProgramStackRecursive:(NSMutableArray *)programStack {
+    double result = 0.0;
+    double operand1, operand2;
     
-    switch (operator) {
-        case OPERATOR_PLUS:     result = [self popOperand] + [self popOperand]; break;
-        case OPERATOR_MINUS:    result = ([self popOperand] - [self popOperand]) * -1.0; break;
-        case OPERATOR_MULTIPLY: result = [self popOperand] * [self popOperand]; break;
-        case OPERATOR_DIVIDE:
-            operand2 = [self popOperand];
-            operand1 = [self popOperand];
-            if (operand2 != 0.0f) {
-                result = operand1 / operand2;
-            }
-        case OPERATOR_SIN:      result = sin([self popOperand] * PI / 180.0f); break;
-        case OPERATOR_COS:      result = cos([self popOperand] * PI / 180.0f); break;
-        case OPERATOR_SQRT:     result = sqrt([self popOperand]); break;
-        case OPERATOR_PI:       result = PI;
-        default: break;
+    // Take the last token of the expression off the stack
+    id topOfStack = [programStack lastObject];
+    if (topOfStack) {
+        [programStack removeLastObject];
     }
     
-    [self.operandsStack addObject:[NSNumber numberWithDouble:result]];
+    if ([topOfStack isKindOfClass:[NSNumber class]]) {
+        // If its a constant, return the constant
+        result = [topOfStack doubleValue];
+        
+    } else if ([topOfStack isKindOfClass:[NSValue class]]) {
+        // If its an operator, recursively evaluate the expression
+        
+        OPERATOR_t operator;
+        [topOfStack getValue:&operator];
     
-    [self debugPrintStack];
+        switch (operator) {
+            case OPERATOR_PLUS:     result = [self evaluateProgramStackRecursive:programStack] + [self evaluateProgramStackRecursive:programStack]; break;
+            case OPERATOR_MINUS:    result = ([self evaluateProgramStackRecursive:programStack] - [self evaluateProgramStackRecursive:programStack]) * -1.0; break;
+            case OPERATOR_MULTIPLY: result = [self evaluateProgramStackRecursive:programStack] * [self evaluateProgramStackRecursive:programStack]; break;
+            case OPERATOR_DIVIDE:
+                operand2 = [self evaluateProgramStackRecursive:programStack];
+                operand1 = [self evaluateProgramStackRecursive:programStack];
+                if (operand2 != 0.0f) {
+                    result = operand1 / operand2;
+                }
+            case OPERATOR_SIN:      result = sin([self evaluateProgramStackRecursive:programStack] * PI / 180.0f); break;
+            case OPERATOR_COS:      result = cos([self evaluateProgramStackRecursive:programStack] * PI / 180.0f); break;
+            case OPERATOR_SQRT:     result = sqrt([self evaluateProgramStackRecursive:programStack]); break;
+            case OPERATOR_PI:       result = PI;
+            default: break;
+        }
+    }
     
     return result;
 }
 
-- (void) Reset {
-    [self.operandsStack removeAllObjects];
++ (double) runProgram:(id)program {
+    double result = 0.0;
+    
+    NSMutableArray *programStack = nil;
+    if ([program isKindOfClass:[NSArray class]]) {
+        programStack = [program mutableCopy];
+        if (programStack) {
+            result = [self evaluateProgramStackRecursive:programStack];
+        }
+    }
+    
+    return  result;
+}
+
++ (NSString *) getDescriptionOfProgram:(id)program {
+    NSString *description = @"";
+    
+    return  description;
 }
 
 @end
