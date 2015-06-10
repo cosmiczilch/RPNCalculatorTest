@@ -122,9 +122,77 @@
     return  result;
 }
 
++ (NSString *) getInfixExpressionFromPostfixExpression:(NSMutableArray *)postfixExpression {
+    id topOfStack = [postfixExpression lastObject];
+    if (topOfStack) {
+        [postfixExpression removeLastObject];
+    }
+    
+    if (!topOfStack) {
+        // Nothing to do
+        return @"";
+        
+    } else if ([topOfStack isKindOfClass:[NSNumber class]]) {
+        // Its a number, return it
+        return [topOfStack stringValue];
+        
+    } else if ([topOfStack isKindOfClass:[NSString class]]) {
+        // Its a variable, return it
+        return (NSString *)topOfStack;
+        
+    } else if ([topOfStack isKindOfClass:[NSValue class]]) {
+        // Its an operator, recursively construct the infix expression
+        
+        OPERATOR_t operator;
+        [topOfStack getValue:&operator];
+        
+        switch (operator) {
+            case OPERATOR_PLUS:
+                return [NSString stringWithFormat:@"(%@ + %@)", [self getInfixExpressionFromPostfixExpression:postfixExpression], [self getInfixExpressionFromPostfixExpression:postfixExpression]];
+                break;
+                
+            case OPERATOR_MINUS:
+                return [NSString stringWithFormat:@"(%@ - %@)", [self getInfixExpressionFromPostfixExpression:postfixExpression], [self getInfixExpressionFromPostfixExpression:postfixExpression]];
+                break;
+                
+            case OPERATOR_MULTIPLY:
+                return [NSString stringWithFormat:@"(%@ * %@)", [self getInfixExpressionFromPostfixExpression:postfixExpression], [self getInfixExpressionFromPostfixExpression:postfixExpression]];
+                break;
+                
+            case OPERATOR_DIVIDE:
+                return [NSString stringWithFormat:@"(%@ / %@)", [self getInfixExpressionFromPostfixExpression:postfixExpression], [self getInfixExpressionFromPostfixExpression:postfixExpression]];
+                break;
+                
+            case OPERATOR_SIN:
+                return [NSString stringWithFormat:@"sin(%@)", [self getInfixExpressionFromPostfixExpression:postfixExpression]];
+                break;
+                
+            case OPERATOR_COS:
+                return [NSString stringWithFormat:@"cos(%@)", [self getInfixExpressionFromPostfixExpression:postfixExpression]];
+                break;
+                
+            case OPERATOR_SQRT:
+                return [NSString stringWithFormat:@"sqrt(%@)", [self getInfixExpressionFromPostfixExpression:postfixExpression]];
+                break;
+                
+            case OPERATOR_PI:
+                return @"pi";
+                break;
+                
+                
+            default:
+                break;
+        }
+    }
+    return @"";
+}
 
 + (NSString *) getDescriptionOfProgram:(id)program {
     NSString *description = @"";
+    if ([program isKindOfClass:[NSArray class]]) {
+        NSMutableArray *programMutable = [program mutableCopy];
+        description = [self getInfixExpressionFromPostfixExpression:programMutable];
+    }
     
     return  description;
 }

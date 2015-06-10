@@ -17,9 +17,6 @@
 // An instance of the calculator model
 @property (nonatomic) RPNCalculator *rpnCalculator;
 
-// A string that holds every operand and operator that has been sent to the calculator, seperated by white spaces
-@property (nonatomic) NSString *currentInputStringComplete;
-
 // Dictionary of variable values keyed by variable names
 @property (nonatomic) NSMutableDictionary *variableKVPs;
 
@@ -38,9 +35,6 @@
         // Custom initialization
         if (!self.rpnCalculator) {
             self.rpnCalculator = [[RPNCalculator alloc] init];
-        }
-        if (!self.currentInputStringComplete) {
-            self.currentInputStringComplete = @"";
         }
         if (!self.variableKVPs) {
             self.variableKVPs = [[NSMutableDictionary alloc] init];
@@ -160,14 +154,11 @@
 
 - (void) updateStackDisplayWithString:(NSString *)stringToAppend {
     
-    self.currentInputStringComplete = [self.currentInputStringComplete stringByAppendingString:@" "];
-    self.currentInputStringComplete = [self.currentInputStringComplete stringByAppendingString:stringToAppend];
-    self.stackDisplay.text = self.currentInputStringComplete;
+    self.stackDisplay.text = [RPNCalculator getDescriptionOfProgram:self.rpnCalculator.currentProgram];
 }
 
 - (void) clearStackDisplay {
-    self.currentInputStringComplete = @"";
-    self.stackDisplay.text = self.currentInputStringComplete;
+    self.stackDisplay.text = @"";
 }
 
 - (void) captureCurrentResultAsVariable:(NSString*)variableName {
