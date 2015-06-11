@@ -44,13 +44,6 @@
     return self;
 }
 
-- (void)viewDidLoad {
-    id graphingViewController = [self.splitViewController.childViewControllers lastObject];
-    if ([graphingViewController isKindOfClass:[GraphingViewController class]]) {
-        self.graphingViewControllerRef = graphingViewController;
-    }
-}
-
 // UI Event Handlers
 
 - (IBAction)OperatorPressed:(UIButton *)sender {
@@ -175,7 +168,13 @@
 }
 
 - (IBAction)GraphButtonPressed:(UIButton *)sender {
-    [self.graphingViewControllerRef graphExpression:[self.rpnCalculator currentProgram] withEvaluator:self];
+    if (self.splitViewController) {
+        // We're running in a split view container, grab the graphing view controller
+        id graphingViewController = [self.splitViewController.childViewControllers lastObject];
+        if ([graphingViewController isKindOfClass:[GraphingViewController class]]) {
+            [graphingViewController graphExpression:[self.rpnCalculator currentProgram] withEvaluator:self];
+        }
+    }
 }
 
 // Implement interface ExpressionEvaluatorDelegate

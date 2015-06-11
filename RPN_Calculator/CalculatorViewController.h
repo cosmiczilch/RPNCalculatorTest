@@ -13,15 +13,11 @@
 @interface CalculatorViewController : UIViewController <ExpressionEvaluatorDelegate>
 
 - (id)initWithCoder:(NSCoder *)coder;
-- (void)viewDidLoad;
 
 // UI References
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *stackDisplay;
 @property (weak, nonatomic) IBOutlet UILabel *variablesUsedDisplay;
-
-// Reference to the graphing view controller used to graph the expression
-@property (weak, nonatomic) GraphingViewController *graphingViewControllerRef;
 
 // Implement interface ExpressionEvaluatorDelegate
 - (double) getValueOfExpression:(id)expression atValue:(double)value;
