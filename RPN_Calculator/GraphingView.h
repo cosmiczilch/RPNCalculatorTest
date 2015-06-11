@@ -15,7 +15,7 @@
 
 @protocol GraphingViewDataSourceDelegate <NSObject>
 @required
--(double)getFunctionValueAtVariableValue:(double)x withSender:(GraphingView *)sender;
+- (double)getFunctionValueAtVariableValue:(double)x withSender:(GraphingView *)sender;
 @end
 
 @interface GraphingView : UIView

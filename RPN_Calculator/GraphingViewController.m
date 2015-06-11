@@ -14,6 +14,26 @@
 
 @implementation GraphingViewController
 
+// Properties
+
+- (void) viewDidLoad {
+    if ([self.view isKindOfClass:[GraphingView class]]) {
+        self.graphingViewRef = (GraphingView *)self.view;
+        self.graphingViewRef.dataSourceDelegate = self;
+    }
+}
+
+// Implement interface GraphingViewDataSourceDelegate
+- (double)getFunctionValueAtVariableValue:(double)x withSender:(GraphingView *)sender {
+    return [self.savedExpressionEvaluatorDelegate getValueOfExpression:self.savedExpression atValue:x];
+}
+
+- (void)graphExpression:(id)expression withEvaluator:(id <ExpressionEvaluatorDelegate>)evaluatorDelegate {
+    self.savedExpression = expression;
+    self.savedExpressionEvaluatorDelegate = evaluatorDelegate;
+    
+    [self.graphingViewRef setNeedsDisplay];
+}
 
 
 @end

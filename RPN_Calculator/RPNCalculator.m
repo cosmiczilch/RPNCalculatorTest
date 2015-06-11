@@ -103,8 +103,8 @@
                 if (operand2 != 0.0f) {
                     result = operand1 / operand2;
                 }
-            case OPERATOR_SIN:      result = sin([self evaluateProgramStackRecursive:programStack withVariables:variableValues] * PI / 180.0f); break;
-            case OPERATOR_COS:      result = cos([self evaluateProgramStackRecursive:programStack withVariables:variableValues] * PI / 180.0f); break;
+            case OPERATOR_SIN:      result = sin([self evaluateProgramStackRecursive:programStack withVariables:variableValues]); break;
+            case OPERATOR_COS:      result = cos([self evaluateProgramStackRecursive:programStack withVariables:variableValues]); break;
             case OPERATOR_SQRT:     result = sqrt([self evaluateProgramStackRecursive:programStack withVariables:variableValues]); break;
             case OPERATOR_PI:       result = PI;
             default: break;

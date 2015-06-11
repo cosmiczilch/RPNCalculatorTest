@@ -11,7 +11,26 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GraphingViewController : UIViewController
+#import "RPNCalculator.h"
+#import "GraphingView.h"
+
+@protocol ExpressionEvaluatorDelegate <NSObject>
+- (double) getValueOfExpression:(id)expression atValue:(double)value;
+@end
+
+@interface GraphingViewController : UIViewController <GraphingViewDataSourceDelegate>
+
+@property (nonatomic) GraphingView *graphingViewRef;
+
+- (void) viewDidLoad;
+
+- (void)graphExpression:(id)expression withEvaluator:(id <ExpressionEvaluatorDelegate>)evaluatorDelegate;
+
+@property (nonatomic, weak) id<ExpressionEvaluatorDelegate> savedExpressionEvaluatorDelegate;
+@property (nonatomic, weak) id savedExpression;
+
+// Implement interface GraphingViewDataSourceDelegate
+- (double)getFunctionValueAtVariableValue:(double)x withSender:(GraphingView *)sender;
 
 @end
 

@@ -56,7 +56,7 @@ CartesianBounds CartesianBoundsMake(CGFloat xMin, CGFloat xMax, CGFloat yMin, CG
 }
 
 - (id)customInit {
-    self.currentCartesianBounds = CartesianBoundsMake(-2.0f, 2.0f, -2.0f, 2.0f);
+    self.currentCartesianBounds = CartesianBoundsMake(-10.0f, 10.0f, -10.0f, 10.0f);
     
     return self;
 }
@@ -137,13 +137,17 @@ CartesianBounds CartesianBoundsMake(CGFloat xMin, CGFloat xMax, CGFloat yMin, CG
     
     CGFloat color[] = {1.0f, 1.0f, 1.0f, 1.0f};
     
-    CGFloat xMin = self.currentCartesianBounds.xMin;
-    double fx = [self.dataSourceDelegate getFunctionValueAtVariableValue:xMin withSender:self];
-    CGPoint point1 = CGPointMake(xMin, fx);
+    CGFloat x = self.currentCartesianBounds.xMin;
+    double fx = [self.dataSourceDelegate getFunctionValueAtVariableValue:x withSender:self];
+    CGPoint point1 = CGPointMake(x, fx);
     CGPoint point2;
+    CGPoint screenspacePoint;
     
     CGFloat numPixelsAlongX = self.screenDimensionsInPoints.dx;
-    for (int x = 0; x < numPixelsAlongX; ++x) {
+    for (int xPixel = 0; xPixel < numPixelsAlongX; ++xPixel) {
+        
+        screenspacePoint = CGPointMake(xPixel, 0.0f);
+        x = [self getCartesianPointForScreenSpacePoint:screenspacePoint].x;
         fx = [self.dataSourceDelegate getFunctionValueAtVariableValue:x withSender:self];
         point2 = CGPointMake(x, fx);
         

@@ -27,7 +27,7 @@
 
 @implementation CalculatorViewController
 
-// Overridden Constructor:
+// Overridden Constructors:
 - (id)initWithCoder:(NSCoder *)coder {
     
     self = [super initWithCoder:coder];
@@ -42,6 +42,13 @@
     }
     
     return self;
+}
+
+- (void)viewDidLoad {
+    id graphingViewController = [self.splitViewController.childViewControllers lastObject];
+    if ([graphingViewController isKindOfClass:[GraphingViewController class]]) {
+        self.graphingViewControllerRef = graphingViewController;
+    }
 }
 
 // UI Event Handlers
@@ -165,6 +172,17 @@
         [self.rpnCalculator UndoLastOperation];
         [self updateVariablesUsedDisplayAndStackDisplayWithString:@""];
     }
+}
+
+- (IBAction)GraphButtonPressed:(UIButton *)sender {
+    [self.graphingViewControllerRef graphExpression:[self.rpnCalculator currentProgram] withEvaluator:self];
+}
+
+// Implement interface ExpressionEvaluatorDelegate
+- (double) getValueOfExpression:(id)expression atValue:(double)value {
+    NSMutableDictionary *variableDictionary = [[NSMutableDictionary alloc] init];
+    [variableDictionary setValue:[NSNumber numberWithDouble:value] forKey:@"x"];
+    return [RPNCalculator runProgram:expression withVariables:variableDictionary];
 }
 
 // Private Helpers

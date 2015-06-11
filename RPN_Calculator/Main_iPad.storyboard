@@ -301,6 +301,28 @@
                                     <action selector="ClearButtonPressed" destination="t9i-bl-wzq" eventType="touchUpInside" id="rN0-9k-hfM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWL-L9-7yx">
+                                <rect key="frame" x="16" y="147" width="100" height="34"/>
+                                <color key="backgroundColor" red="0.20533205560000001" green="0.9011403093" blue="0.18501984190000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                <state key="normal" title="GRAPH">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="GraphButtonPressed:" destination="t9i-bl-wzq" eventType="touchUpInside" id="Xn9-EN-7jL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eco-ly-N4Q">
+                                <rect key="frame" x="100" y="330" width="34" height="34"/>
+                                <color key="backgroundColor" red="0.20533205560000001" green="0.9011403093" blue="0.18501984190000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                <state key="normal" title="x">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="VariableButtonPressed:" destination="t9i-bl-wzq" eventType="touchUpInside" id="48j-OA-bSr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.9011403093" green="0.39732024859999998" blue="0.37229390449999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
