@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nGn-LN-viJ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Calculator View Controller-->
@@ -35,17 +36,31 @@
                     <view key="view" contentMode="scaleToFill" id="D29-Wl-fae" customClass="GraphingView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kcC-V5-2DG">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items/>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" red="0.53054962429999997" green="0.64716675540000002" blue="0.67155934340000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="kcC-V5-2DG" secondAttribute="centerX" id="6Yu-gl-dFR"/>
+                            <constraint firstItem="kcC-V5-2DG" firstAttribute="leading" secondItem="D29-Wl-fae" secondAttribute="leadingMargin" constant="-16" id="YMy-cE-Uji"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kcC-V5-2DG" secondAttribute="trailing" constant="-16" id="bVb-ce-BAa"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="toolbar" destination="kcC-V5-2DG" id="HJI-P9-z8c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qdY-cO-shd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="538" y="1574"/>
         </scene>
-        <!--Calculator View Controller-->
+        <!--Calculator-->
         <scene sceneID="81L-3g-7r5">
             <objects>
-                <viewController id="t9i-bl-wzq" customClass="CalculatorViewController" sceneMemberID="viewController">
+                <viewController title="Calculator" id="t9i-bl-wzq" customClass="CalculatorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QRO-c9-HhQ"/>
                         <viewControllerLayoutGuide type="bottom" id="Aie-1F-MDV"/>

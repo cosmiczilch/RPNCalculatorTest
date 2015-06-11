@@ -21,6 +21,11 @@
         self.graphingViewRef = (GraphingView *)self.view;
         self.graphingViewRef.dataSourceDelegate = self;
     }
+    
+    // Add split display controller's master view button to the toolbar
+    NSMutableArray *buttons = [[NSMutableArray alloc] init];
+    [buttons addObject:self.splitViewController.displayModeButtonItem];
+    [self.toolbar setItems:[buttons copy]];
 }
 
 // Implement interface GraphingViewDataSourceDelegate

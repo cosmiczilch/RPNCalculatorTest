@@ -20,6 +20,8 @@
 
 @interface GraphingViewController : UIViewController <GraphingViewDataSourceDelegate>
 
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+
 @property (nonatomic) GraphingView *graphingViewRef;
 
 - (void) viewDidLoad;
