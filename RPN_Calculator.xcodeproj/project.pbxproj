@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		E11855071B2643360001A5E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E11855061B2643360001A5E8 /* main.m */; };
 		E118550A1B2643360001A5E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E11855091B2643360001A5E8 /* AppDelegate.m */; };
-		E118550D1B2643360001A5E8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E118550C1B2643360001A5E8 /* ViewController.m */; };
+		E118550D1B2643360001A5E8 /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E118550C1B2643360001A5E8 /* CalculatorViewController.m */; };
 		E11855101B2643360001A5E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E118550E1B2643360001A5E8 /* Main.storyboard */; };
 		E11855121B2643360001A5E8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E11855111B2643360001A5E8 /* Images.xcassets */; };
 		E11855151B2643360001A5E8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E11855131B2643360001A5E8 /* LaunchScreen.xib */; };
@@ -37,8 +37,8 @@
 		E11855061B2643360001A5E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E11855081B2643360001A5E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E11855091B2643360001A5E8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E118550B1B2643360001A5E8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E118550C1B2643360001A5E8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E118550B1B2643360001A5E8 /* CalculatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
+		E118550C1B2643360001A5E8 /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
 		E118550F1B2643360001A5E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E11855111B2643360001A5E8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E11855141B2643360001A5E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -97,8 +97,8 @@
 				E15195C71B2A0D4F003DBD56 /* Main_iPad.storyboard */,
 				E11855081B2643360001A5E8 /* AppDelegate.h */,
 				E11855091B2643360001A5E8 /* AppDelegate.m */,
-				E118550B1B2643360001A5E8 /* ViewController.h */,
-				E118550C1B2643360001A5E8 /* ViewController.m */,
+				E118550B1B2643360001A5E8 /* CalculatorViewController.h */,
+				E118550C1B2643360001A5E8 /* CalculatorViewController.m */,
 				E15195C91B2A10A6003DBD56 /* GraphingViewController.h */,
 				E15195CA1B2A10CB003DBD56 /* GraphingViewController.m */,
 				E15195CC1B2A11AA003DBD56 /* GraphingView.h */,
@@ -245,7 +245,7 @@
 				E15195CE1B2A11BC003DBD56 /* GraphingView.m in Sources */,
 				E118552B1B266BB70001A5E8 /* RPNCalculator.m in Sources */,
 				E15195CB1B2A10CB003DBD56 /* GraphingViewController.m in Sources */,
-				E118550D1B2643360001A5E8 /* ViewController.m in Sources */,
+				E118550D1B2643360001A5E8 /* CalculatorViewController.m in Sources */,
 				E118550A1B2643360001A5E8 /* AppDelegate.m in Sources */,
 				E11855071B2643360001A5E8 /* main.m in Sources */,
 			);

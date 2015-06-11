@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Avinash Krishnan. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "CalculatorViewController.h"
 #import "RPNCalculator.h"
 
-@interface ViewController ()
+@interface CalculatorViewController ()
 
 // Whether the user has begun entering input
 @property (nonatomic) BOOL currentlyEnteringInput;
@@ -25,7 +25,7 @@
 @end
 
 
-@implementation ViewController
+@implementation CalculatorViewController
 
 // Overridden Constructor:
 - (id)initWithCoder:(NSCoder *)coder {

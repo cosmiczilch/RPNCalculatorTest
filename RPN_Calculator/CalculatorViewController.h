@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface CalculatorViewController : UIViewController
 
 - (id)initWithCoder:(NSCoder *)coder;
 
