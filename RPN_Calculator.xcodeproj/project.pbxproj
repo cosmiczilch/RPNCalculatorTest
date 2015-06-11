@@ -15,6 +15,10 @@
 		E11855151B2643360001A5E8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E11855131B2643360001A5E8 /* LaunchScreen.xib */; };
 		E11855211B2643370001A5E8 /* RPN_CalculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E11855201B2643370001A5E8 /* RPN_CalculatorTests.m */; };
 		E118552B1B266BB70001A5E8 /* RPNCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E118552A1B266BB70001A5E8 /* RPNCalculator.m */; };
+		E15195C61B2A0A8A003DBD56 /* Main_iPad2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15195C51B2A0A8A003DBD56 /* Main_iPad2.storyboard */; };
+		E15195C81B2A0D4F003DBD56 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15195C71B2A0D4F003DBD56 /* Main_iPad.storyboard */; };
+		E15195CB1B2A10CB003DBD56 /* GraphingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15195CA1B2A10CB003DBD56 /* GraphingViewController.m */; };
+		E15195CE1B2A11BC003DBD56 /* GraphingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E15195CD1B2A11BC003DBD56 /* GraphingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +47,12 @@
 		E11855201B2643370001A5E8 /* RPN_CalculatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RPN_CalculatorTests.m; sourceTree = "<group>"; };
 		E118552A1B266BB70001A5E8 /* RPNCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPNCalculator.m; sourceTree = "<group>"; };
 		E118552C1B266BD10001A5E8 /* RPNCalculator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPNCalculator.h; sourceTree = "<group>"; };
+		E15195C51B2A0A8A003DBD56 /* Main_iPad2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad2.storyboard; sourceTree = "<group>"; };
+		E15195C71B2A0D4F003DBD56 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
+		E15195C91B2A10A6003DBD56 /* GraphingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphingViewController.h; sourceTree = "<group>"; };
+		E15195CA1B2A10CB003DBD56 /* GraphingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphingViewController.m; sourceTree = "<group>"; };
+		E15195CC1B2A11AA003DBD56 /* GraphingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphingView.h; sourceTree = "<group>"; };
+		E15195CD1B2A11BC003DBD56 /* GraphingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,11 +94,17 @@
 		E11855031B2643360001A5E8 /* RPN_Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				E15195C71B2A0D4F003DBD56 /* Main_iPad.storyboard */,
 				E11855081B2643360001A5E8 /* AppDelegate.h */,
 				E11855091B2643360001A5E8 /* AppDelegate.m */,
 				E118550B1B2643360001A5E8 /* ViewController.h */,
 				E118550C1B2643360001A5E8 /* ViewController.m */,
+				E15195C91B2A10A6003DBD56 /* GraphingViewController.h */,
+				E15195CA1B2A10CB003DBD56 /* GraphingViewController.m */,
+				E15195CC1B2A11AA003DBD56 /* GraphingView.h */,
+				E15195CD1B2A11BC003DBD56 /* GraphingView.m */,
 				E118550E1B2643360001A5E8 /* Main.storyboard */,
+				E15195C51B2A0A8A003DBD56 /* Main_iPad2.storyboard */,
 				E11855111B2643360001A5E8 /* Images.xcassets */,
 				E11855131B2643360001A5E8 /* LaunchScreen.xib */,
 				E11855041B2643360001A5E8 /* Supporting Files */,
@@ -204,7 +220,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E15195C81B2A0D4F003DBD56 /* Main_iPad.storyboard in Resources */,
 				E11855101B2643360001A5E8 /* Main.storyboard in Resources */,
+				E15195C61B2A0A8A003DBD56 /* Main_iPad2.storyboard in Resources */,
 				E11855151B2643360001A5E8 /* LaunchScreen.xib in Resources */,
 				E11855121B2643360001A5E8 /* Images.xcassets in Resources */,
 			);
@@ -224,7 +242,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E15195CE1B2A11BC003DBD56 /* GraphingView.m in Sources */,
 				E118552B1B266BB70001A5E8 /* RPNCalculator.m in Sources */,
+				E15195CB1B2A10CB003DBD56 /* GraphingViewController.m in Sources */,
 				E118550D1B2643360001A5E8 /* ViewController.m in Sources */,
 				E118550A1B2643360001A5E8 /* AppDelegate.m in Sources */,
 				E11855071B2643360001A5E8 /* main.m in Sources */,
