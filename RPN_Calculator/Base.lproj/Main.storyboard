@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Zgh-om-5k7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Calculator-->
@@ -325,11 +326,64 @@
                     <connections>
                         <outlet property="display" destination="V9A-gl-LYk" id="o9c-vj-lhG"/>
                         <outlet property="stackDisplay" destination="hHD-GN-u9X" id="tN1-8q-3BA"/>
+                        <segue destination="1zK-rz-jaa" kind="show" identifier="ShowGraphSegue" id="a2N-Ax-HPC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7JL-tp-o4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="156" y="772"/>
+        </scene>
+        <!--Graphing View Controller-->
+        <scene sceneID="cTn-Nb-gir">
+            <objects>
+                <viewController id="1zK-rz-jaa" customClass="GraphingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LhG-UJ-yQC"/>
+                        <viewControllerLayoutGuide type="bottom" id="XZR-cF-mzJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JVk-fQ-0sv" customClass="GraphingView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G0k-JN-Jc3">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem width="200" style="plain" id="TUF-El-ymr">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nVA-Sz-3ye">
+                                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal" title="&lt;&lt; Calculator">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="backButtonPressed:" destination="1zK-rz-jaa" eventType="touchUpInside" id="JzP-Lt-NoY"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                </items>
+                                <variation key="widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                </variation>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.53054962429999997" green="0.64716675540000002" blue="0.67155934340000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="G0k-JN-Jc3" secondAttribute="centerX" id="GDF-dm-e5v"/>
+                            <constraint firstItem="G0k-JN-Jc3" firstAttribute="leading" secondItem="JVk-fQ-0sv" secondAttribute="leadingMargin" constant="-16" id="He8-oa-4DH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="G0k-JN-Jc3" secondAttribute="trailing" constant="-16" id="uVh-9O-hKA"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="backButton" destination="nVA-Sz-3ye" id="icj-fH-KLn"/>
+                        <outlet property="toolbar" destination="G0k-JN-Jc3" id="I61-Zh-Chq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sE6-yQ-xCh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="846" y="710"/>
         </scene>
     </scenes>
 </document>

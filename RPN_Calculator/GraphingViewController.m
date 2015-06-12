@@ -23,22 +23,30 @@
     }
     
     // Add split display controller's master view button to the toolbar
-    NSMutableArray *buttons = [[NSMutableArray alloc] init];
-    [buttons addObject:self.splitViewController.displayModeButtonItem];
-    [self.toolbar setItems:[buttons copy]];
+    if (self.splitViewController) {
+        // Hide our back button, and use the split view controller's instead
+        self.backButton.hidden = true;
+        
+        NSMutableArray *buttons = [[NSMutableArray alloc] init];
+        [buttons addObject:self.splitViewController.displayModeButtonItem];
+        [self.toolbar setItems:[buttons copy]];
+    }
 }
 
 // Implement interface GraphingViewDataSourceDelegate
-- (double)getFunctionValueAtVariableValue:(double)x withSender:(GraphingView *)sender {
+- (double) getFunctionValueAtVariableValue:(double)x withSender:(GraphingView *)sender {
     return [self.savedExpressionEvaluatorDelegate getValueOfExpression:self.savedExpression atValue:x];
 }
 
-- (void)graphExpression:(id)expression withEvaluator:(id <ExpressionEvaluatorDelegate>)evaluatorDelegate {
-    self.savedExpression = expression;
+- (void) graphExpression:(id)expression withEvaluator:(id <ExpressionEvaluatorDelegate>)evaluatorDelegate {
+    self.savedExpression = [expression copy];
     self.savedExpressionEvaluatorDelegate = evaluatorDelegate;
     
     [self.graphingViewRef setNeedsDisplay];
 }
 
+- (IBAction)backButtonPressed:(UIButton *)sender {
+    [self dismissViewControllerAnimated:true completion:nil];
+}
 
 @end

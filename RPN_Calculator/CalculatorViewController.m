@@ -172,9 +172,27 @@
         // We're running in a split view container, grab the graphing view controller
         id graphingViewController = [self.splitViewController.childViewControllers lastObject];
         if ([graphingViewController isKindOfClass:[GraphingViewController class]]) {
-            [graphingViewController graphExpression:[self.rpnCalculator currentProgram] withEvaluator:self];
+            [self configureGraphingViewController:graphingViewController];
+        }
+        
+    } else {
+        // Segue to a new graphing view controller
+        [self performSegueWithIdentifier:@"ShowGraphSegue" sender:self];
+        
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"ShowGraphSegue"]) {
+        NSLog(@"Prepare for segue");
+        if ([segue.destinationViewController isKindOfClass:[GraphingViewController class]]) {
+            [self configureGraphingViewController:segue.destinationViewController];
         }
     }
+}
+
+- (void)configureGraphingViewController:(GraphingViewController *)controller {
+    [controller graphExpression:[self.rpnCalculator currentProgram] withEvaluator:self];
 }
 
 // Implement interface ExpressionEvaluatorDelegate

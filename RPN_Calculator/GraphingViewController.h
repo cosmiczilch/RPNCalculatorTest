@@ -21,6 +21,7 @@
 @interface GraphingViewController : UIViewController <GraphingViewDataSourceDelegate>
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 @property (nonatomic) GraphingView *graphingViewRef;
 
@@ -29,7 +30,7 @@
 - (void)graphExpression:(id)expression withEvaluator:(id <ExpressionEvaluatorDelegate>)evaluatorDelegate;
 
 @property (nonatomic, weak) id<ExpressionEvaluatorDelegate> savedExpressionEvaluatorDelegate;
-@property (nonatomic, weak) id savedExpression;
+@property (nonatomic, strong) id savedExpression;
 
 // Implement interface GraphingViewDataSourceDelegate
 - (double)getFunctionValueAtVariableValue:(double)x withSender:(GraphingView *)sender;
