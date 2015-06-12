@@ -28,6 +28,10 @@
 
 @property (nonatomic) id<GraphingViewDataSourceDelegate> dataSourceDelegate;
 
+- (void)panByAmount:(CGVector)amount;
+- (void)scaleByAmount:(CGFloat)amount;
+- (void)moveOriginToScreenSpacePoint:(CGPoint)point;
+
 @end
 
 #endif

@@ -30,7 +30,6 @@ CartesianBounds CartesianBoundsMake(CGFloat xMin, CGFloat xMax, CGFloat yMin, CG
 @interface GraphingView()
 
 @property (readonly) CGVector screenDimensionsInPoints;
-
 @property (nonatomic) CartesianBounds currentCartesianBounds;
 
 @end
@@ -56,7 +55,11 @@ CartesianBounds CartesianBoundsMake(CGFloat xMin, CGFloat xMax, CGFloat yMin, CG
 }
 
 - (id)customInit {
+    // Sane defaults:
     self.currentCartesianBounds = CartesianBoundsMake(-10.0f, 10.0f, -10.0f, 10.0f);
+    
+    // Restore saved preferences if any
+    [self restoreUserDefaults];
     
     return self;
 }
@@ -162,23 +165,65 @@ CartesianBounds CartesianBoundsMake(CGFloat xMin, CGFloat xMax, CGFloat yMin, CG
     
     [self drawAxesWithContext:context];
     [self plotGraphWithContext:context];
-    
-//    CGContextSetLineWidth(context, 2.0);
-//    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-//    CGFloat components[] = {0.0, 0.0, 1.0, 1.0};
-//    CGColorRef color = CGColorCreate(colorspace, components);
-//    
-//    CGContextSetStrokeColorWithColor(context, color);
-//    
-//    CGContextMoveToPoint(context, 0, 0);
-//    CGContextAddLineToPoint(context, self.screenDimensionsInPoints.dx, self.screenDimensionsInPoints.dy);
-//    
-//    CGContextStrokePath(context);
-//    CGColorSpaceRelease(colorspace);
-//    CGColorRelease(color);
-//    
-    
 }
+
+- (void)panByAmount:(CGVector)amount {
+    self.currentCartesianBounds = CartesianBoundsMake(
+                                                      self.currentCartesianBounds.xMin + amount.dx,
+                                                      self.currentCartesianBounds.xMax + amount.dx,
+                                                      self.currentCartesianBounds.yMin + amount.dy,
+                                                      self.currentCartesianBounds.yMax + amount.dy);
+    [self setNeedsDisplay];
+    [self saveUserDefaults];
+}
+
+- (void)scaleByAmount:(CGFloat)amount {
+    if (amount == 0.0f) {
+        return;
+    }
+    self.currentCartesianBounds = CartesianBoundsMake(
+                                                      self.currentCartesianBounds.xMin / amount,
+                                                      self.currentCartesianBounds.xMax / amount,
+                                                      self.currentCartesianBounds.yMin / amount,
+                                                      self.currentCartesianBounds.yMax / amount);
+    [self setNeedsDisplay];
+    [self saveUserDefaults];
+}
+
+- (void)moveOriginToScreenSpacePoint:(CGPoint)point {
+    CGPoint newOriginInCartesianSpace = [self getCartesianPointForScreenSpacePoint:point];
+    CGVector panAmount = CGVectorMake(-newOriginInCartesianSpace.x, -newOriginInCartesianSpace.y);
+    
+    [self panByAmount:panAmount];
+    [self saveUserDefaults];
+}
+
+- (void)saveUserDefaults {
+    NSUserDefaults *blob = [NSUserDefaults standardUserDefaults];
+    
+    NSMutableDictionary *origin = [[NSMutableDictionary alloc] init];
+    [origin setObject:[NSNumber numberWithDouble:self.currentCartesianBounds.xMin] forKey:@"xMin"];
+    [origin setObject:[NSNumber numberWithDouble:self.currentCartesianBounds.xMax] forKey:@"xMax"];
+    [origin setObject:[NSNumber numberWithDouble:self.currentCartesianBounds.yMin] forKey:@"yMin"];
+    [origin setObject:[NSNumber numberWithDouble:self.currentCartesianBounds.yMax] forKey:@"yMax"];
+    
+    [blob setObject:[origin copy] forKey:@"savedOrigin"];
+    
+    [blob synchronize];
+}
+
+- (void)restoreUserDefaults {
+    NSUserDefaults *blob = [NSUserDefaults standardUserDefaults];
+    NSDictionary *origin = [blob objectForKey:@"savedOrigin"];
+    if (origin) {
+        self.currentCartesianBounds = CartesianBoundsMake(
+                                                          [[origin objectForKey:@"xMin"] doubleValue],
+                                                          [[origin objectForKey:@"xMax"] doubleValue],
+                                                          [[origin objectForKey:@"yMin"] doubleValue],
+                                                          [[origin objectForKey:@"yMax"] doubleValue]);
+    }
+}
+
 
 @end
 
