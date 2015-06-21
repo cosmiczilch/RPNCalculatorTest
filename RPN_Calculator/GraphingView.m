@@ -67,7 +67,7 @@ CartesianBounds CartesianBoundsMake(CGFloat xMin, CGFloat xMax, CGFloat yMin, CG
 
 // Properties
 
--(CGVector) screenDimensionsInPoints {
+- (CGVector)screenDimensionsInPoints {
     return CGVectorMake(self.frame.size.width, self.frame.size.height);
 }
 
@@ -92,7 +92,7 @@ CartesianBounds CartesianBoundsMake(CGFloat xMin, CGFloat xMax, CGFloat yMin, CG
 
 // Drawing Helpers
 
-- (void) drawLinefromPoint:(CGPoint)point1 toPoint:(CGPoint)point2 withThickness:(CGFloat)thickness andColor:(CGFloat[4])color inContext:(CGContextRef)context {
+- (void)drawLinefromPoint:(CGPoint)point1 toPoint:(CGPoint)point2 withThickness:(CGFloat)thickness andColor:(CGFloat[4])color inContext:(CGContextRef)context {
     
     // Convert given points from cartesian to screen space
     CGPoint point1InScreenspace = [self getScreenSpacePointForCartesianPoint:point1];

@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "GraphingViewController.h"
 
-@interface GraphingViewController()
-@end
-
 @implementation GraphingViewController
 
 static const double PAN_SPEED_SCALE_FACTOR = 0.04f;

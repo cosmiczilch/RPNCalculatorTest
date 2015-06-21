@@ -22,15 +22,12 @@
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
-
 @property (nonatomic) GraphingView *graphingViewRef;
 
-- (void) viewDidLoad;
+@property (weak, nonatomic) id<ExpressionEvaluatorDelegate> savedExpressionEvaluatorDelegate;
+@property (strong, nonatomic) id savedExpression;
 
 - (void)graphExpression:(id)expression withEvaluator:(id <ExpressionEvaluatorDelegate>)evaluatorDelegate;
-
-@property (nonatomic, weak) id<ExpressionEvaluatorDelegate> savedExpressionEvaluatorDelegate;
-@property (nonatomic, strong) id savedExpression;
 
 // Implement interface GraphingViewDataSourceDelegate
 - (double)getFunctionValueAtVariableValue:(double)x withSender:(GraphingView *)sender;

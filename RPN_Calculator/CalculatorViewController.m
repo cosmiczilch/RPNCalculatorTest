@@ -170,9 +170,10 @@
 - (IBAction)GraphButtonPressed:(UIButton *)sender {
     if (self.splitViewController) {
         // We're running in a split view container, grab the graphing view controller
-        id graphingViewController = [self.splitViewController.childViewControllers lastObject];
-        if ([graphingViewController isKindOfClass:[GraphingViewController class]]) {
-            [self configureGraphingViewController:graphingViewController];
+        for (id controller in self.splitViewController.childViewControllers) {
+            if ([controller isKindOfClass:[GraphingViewController class]]) {
+                [self configureGraphingViewController:controller];
+            }
         }
         
     } else {
